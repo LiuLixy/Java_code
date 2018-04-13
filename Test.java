@@ -548,7 +548,7 @@ class Person{
 			return false;
 		}
 		Person p = (Person)obj;
-		return (this.name.equals(p.name)) && (this.age == p.age) && (this.salary.equals(p.salary));
+		return (this.name.equals(p.name)) && (this.age.equals(p.age)) && (this.salary.equals(p.salary));
 	}
 }
 
