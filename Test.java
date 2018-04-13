@@ -500,6 +500,14 @@ public class Test {
 }
 */
 
+
+/*
+编程题: 
+要求: 
+1).Person类有name,age,salary属性，要求实现至少两个构造方法，并且属性私有，提供对应的getter、setter。 
+2).覆写toString方法，要求在System.out.println()函数中传递Person对象能打印出三个属性值而不是对象地址。 
+3).覆写equals方法，要求两个Person类对象的值相同时返回true。 
+
 class Person{
 	private String name;
 	private Integer age;
@@ -561,3 +569,132 @@ public class Test {
 		System.out.println(p1.equals(p2));
 	}	
 }
+*/
+
+
+/*
+public class Test {
+	public static void main(String[] args) {
+		Integer a = 55;
+		Integer b = 55;
+		System.out.println(a==b);//true
+		System.out.println(a == new Integer(55));  //false
+		System.out.println(a.equals(new Integer(55))); //true
+		Integer c = 129; 
+		Integer d = 129; 
+		System.out.println(c==d); //false
+	}
+}
+
+//在自动装箱时对于在-128~127的值，它们被装箱为Integer对象后，
+//会存在内存中被重用，因为重用，所以Integer b = 55，实际上没有生成新的对象，而是引用了对象a，实际上参考的对象是同一个对象，内存地址一样，所以结果是true。
+//而new Integer(55)是生成了新的对象，"=="比较的是两个对象的内存地址。所以是false。
+//equals比较的是内容是否一致，所以a.equals(new Integer(55)的结果为true。
+//在自动装箱时如果值不在-128~127之间，则被装箱后Integer对象不会被重用，c与d的内存地址也就不一样，所以结果为false。
+
+*/
+
+/*
+ //懒汉式单例
+class Singleton{
+	private static Singleton instance ;
+	private Singleton() { // private声明构造
+	}
+	public static Singleton getInstance() {
+		if (instance==null) { // 表示此时还没有实例化
+		instance = new Singleton() ;
+		}
+		return instance ;
+	}
+	public void print() {
+		System.out.println("Hello World");
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Singleton singleton = null ; // 声明对象
+		singleton = Singleton.getInstance() ;
+		singleton.print();
+	}
+}
+
+*/
+
+
+/*
+编程: 
+1).定义一个MulException类继承Exception类，要求两数相乘等于100报错，在主类中定义一个方法，在方法中抛出此异常，在主方法观察结果。 
+2).定义一个DivException类继承RuntimeException类，要求两数相除等于2报错，在主类中定义一个方法，在方法中抛出此异常，在主方法观察结果。
+
+class MulException extends Exception {
+	public MulException(String str) {
+		super(str);
+	}
+}
+
+class DivException extends Exception {
+	public DivException (String str) {
+		super(str);
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		try{
+			Mul(50,2);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			Div(10,5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static int Mul(int a, int b) throws MulException {
+		int ret = a*b;
+		try {
+			if(ret == 100) {
+				throw new MulException("两数相乘不能为100");
+			}
+		}catch (Exception e) {
+			throw e;
+		}finally {
+			System.out.println("计算结果: "+ret);
+		}
+		return ret;
+	}
+	public static int Div(int a, int b) throws DivException {
+		int ret = a/b;
+		try {
+			if(ret == 2) {
+				throw new DivException("两数相除不能为2");
+			}
+		}catch (Exception e) {
+			throw e;
+		}finally {
+			System.out.println("计算结果： "+ret);
+		}
+		return ret;
+	}
+}
+*/
+
+/*
+题目：猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不过瘾，又多吃了一个,
+第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。
+到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。
+public class Test {
+	public static void main(String[] args) {
+		int ret = getPeach(10);
+		System.out.println(ret);
+	}
+	public static int getPeach(int days) {
+		if(days == 1) {
+			return 1;
+		}
+		return getPeach(days-1)*2 + 1;
+	}
+}
+*/
