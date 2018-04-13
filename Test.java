@@ -499,3 +499,65 @@ public class Test {
    }
 }
 */
+
+class Person{
+	private String name;
+	private Integer age;
+	private Integer salary;
+	public Person() {
+		this.name = "Peter";
+		this.age = 18;
+		this.salary = 20000; 
+	}
+	public Person(String name, Integer age, Integer salary) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public Integer getSalary() {
+		return salary;
+	}
+	public void setSalary(Integer salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "name: "+this.getName()+", age: "+this.getAge()+", salary: "+this.getSalary();
+	}
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this == obj) {
+			return true;
+		}
+		if(!(obj instanceof Person)) {
+			return false;
+		}
+		Person p = (Person)obj;
+		return (this.name.equals(p.name)) && (this.age == p.age) && (this.salary.equals(p.salary));
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Person p1 = new Person("Peter", 18, 20000);
+		Person p2 = new Person();
+		System.out.println(p1.toString());
+		System.out.println(p2.toString());
+		System.out.println(p1.equals(p2));
+	}	
+}
