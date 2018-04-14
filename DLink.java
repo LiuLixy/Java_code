@@ -10,6 +10,7 @@ interface Link {
 	boolean push(int index, Object obj);   //在指定位置之前插入元素
 	boolean pop(int index);        //指定位置删除节点
 	boolean isEmpty();             //判断链表是否为空
+	void printLink();
 	void clear();                  //清空链表
 }
 
@@ -45,6 +46,7 @@ class LinkImpl implements Link {
 		} else {
 			tmp.next = newNode;
 		}
+		newNode = last;
 		this.size++;
 		return true;
 	}
@@ -171,18 +173,25 @@ class LinkImpl implements Link {
 		if(index < 0 ||index >= length()) {
 			return false;
 		}
-		if(index == size - 1) {
-			Node toDelete = last;
-			last = last.prev;
-			last.next = null;
+		if (index == 0) {
+			if(first == last) {
+				this.first = this.last = null;
+				this.size = 0;
+				return true;
+			}
+			Node toDelete = first;
+			first = first.next;
+			first.prev = null;
+			toDelete.next = null;
 			toDelete = null;
 			this.size--;
 			return true;
 		}
-		if (index == 0) {
-			Node toDelete = first;
-			first = first.next;
-			first.prev = null;
+		if(index == size - 1) {
+			Node toDelete = last;
+			last = last.prev;
+			last.next = null;
+			toDelete.prev = null;
 			toDelete = null;
 			this.size--;
 			return true;
@@ -194,6 +203,7 @@ class LinkImpl implements Link {
 		Node toDelete = tmp;
 		Node toDeleteNext = toDelete.next;
 		Node toDeletePrev = toDelete.prev;
+		
 		toDeleteNext.prev = toDelete.prev;
 		toDeletePrev.next = toDelete.next;
 		toDelete = null;
@@ -231,9 +241,18 @@ class LinkImpl implements Link {
 			return tmp;
 		}
 	}
+	@Override
+	public void printLink() {
+		System.out.print("链表内容为: ");
+		Object[] result = this.toArray();
+		for(Object object : result) {
+			System.out.print(object+" ");
+		}
+		System.out.println();
+	}
 }
 
-public class DLink {
+public class Dlink {
 	public static void main(String[] args) {
 		Link link = LinkFactory.getInstance();
 		link.pushBack("a");
@@ -242,6 +261,7 @@ public class DLink {
 		link.pushBack("d");
 		link.pushBack("e");
 		System.out.println("链表的长度为："+link.length());
+		link.printLink();
 		//link.popBack();
 		//System.out.println(link.length());
 		//link.popBack();
@@ -257,53 +277,21 @@ public class DLink {
 		System.out.println("查找不存在的元素'f': "+link.indexOf("f"));
 		System.out.println("取下标为0的元素: "+link.get(0));
 		System.out.println("取下标为5的元素: "+link.get(5));
-		System.out.print("将链表转换为数组: ");
-		Object[] ret = link.toArray();
-		for(int i = 0; i < ret.length; i++) {
-			System.out.print(ret[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
 		System.out.print("将下标为2的元素的值改成'f': ");
 		link.set(2, "f");
-		Object[] result = link.toArray();
-		for(int i = 0; i < result.length; i++) {
-			System.out.print(result[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
-		link.push(0, "g");
+		link.printLink();
 		System.out.print("在下标为0的位置之前插入元素'g': ");
-		result = link.toArray();
-		for(int i = 0; i < result.length; i++) {
-			System.out.print(result[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
+		link.push(0, "g");
+		link.printLink();
 		System.out.print("在下标为3的位置之前插入元素'c': ");
 		link.push(3, 'c');
-		result = link.toArray();
-		for(int i = 0; i < result.length; i++) {
-			System.out.print(result[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
+		link.printLink();
 		System.out.print("删除下标为0的元素: ");
 		link.pop(0);
-		result = link.toArray();
-		for(int i = 0; i < result.length; i++) {
-			System.out.print(result[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
-		System.out.print("清空链表: ");
+		link.printLink();
+		System.out.print("清空链表 ");
 		link.clear();
-		result = link.toArray();
-		for(int i = 0; i < result.length; i++) {
-			System.out.print(result[i]);
-			System.out.print(" ");
-		}
-		System.out.println();
+		link.printLink();
 		System.out.println("链表长度为: "+link.length());
 	}
 }
