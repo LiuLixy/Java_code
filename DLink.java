@@ -252,7 +252,7 @@ class LinkImpl implements Link {
 	}
 }
 
-public class Dlink {
+public class DLink {
 	public static void main(String[] args) {
 		Link link = LinkFactory.getInstance();
 		link.pushBack("a");
