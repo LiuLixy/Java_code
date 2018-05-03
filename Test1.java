@@ -6,7 +6,7 @@ class MyThread implements Runnable {
 	}
 	public void run() {
 		while(this.ticket > 0) {
-			System.out.println(this.title+": "+"Ê£ÓàÆ±Êý: "+this.ticket--);
+			System.out.println(this.title+": "+"å‰©ä½™ç¥¨æ•°: "+this.ticket--);
 		}
 	}
 }
