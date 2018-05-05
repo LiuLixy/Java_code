@@ -6,7 +6,8 @@
 */
 public class TotalPeach {
 	public static void main(String[] args) {
-		int totalPeach = 1; // 假设最后一次的桃子数量为 1 个
+		// 假设开始时桃子数量为 1 个(只要是满足 totalPeach % 5 == 1这个条件即可)
+		int totalPeach = 1; 
 		while (true) {
 			// 如果下面的条件没有满足，即循环的次数没有满足5次就中止，
 			//也就不满足题目的要求，就让totalPeach+5， 直到满足要求
