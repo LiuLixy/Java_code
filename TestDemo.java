@@ -12,7 +12,7 @@ public class TestDemo {
 			System.out.print(i+" ");
 		}
 	}
-	public static void swap(int[] array, int len) {
+	public static void TestDemo(int[] array, int len) {
 		int min = 0;
 		int max = len - 1;
 		int tmp;
