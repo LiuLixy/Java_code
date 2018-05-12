@@ -11,7 +11,7 @@ public class TotalPeach {
 		while (true) {
 			// 如果下面的条件没有满足，即循环的次数没有满足5次就中止，
 			//也就不满足题目的要求，就让totalPeach+5， 直到满足要求
-			totalPeach += 5;  
+			totalPeach += 5;
 			int n = 0;  // 表示的是第几只猴子
 			int curPeach = totalPeach;  // 表示的是当前的桃子数量
 			for (int i = 0; i < 5; i++) {
