@@ -14,7 +14,7 @@ public class TestDemo {
 	}
 	public static void swap(int[] array, int len) {
 		int min = 0;
-		int max = len - 1;
+		int max = 0;
 		int tmp;
 		for (int i = 0; i < len; i++) {
 			if(array[i] < array[min]) {
