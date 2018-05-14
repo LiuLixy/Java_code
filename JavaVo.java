@@ -62,7 +62,7 @@ public class BeanOperation {
 		for (int i = 0; i < result.length; i++) {
 			// 需要针对属性名称及内容做进一步拆分
 			String[] temp = result[i].split(":");
-			// 属性名称 "emp.ename"
+			// 属性名称 "emp.name"
 			String attribute = temp[0];
 			// 属性内容
 			String value = temp[1];
