@@ -9,11 +9,18 @@ public class Test {
 		System.out.print("请输入一个5位数: ");
 		while(sc.hasNext()) {
 			int num = sc.nextInt();
-			if((num/10000 == num % 10) && 
-					(num/1000%10 == num % 100 / 10)) {
-				System.out.println(num+"是回文数..");
+			if (num / 10000 > 0 && num / 10000 < 10) {
+				if((num/10000 == num % 10) && 
+						(num/1000%10 == num % 100 / 10)) {
+					System.out.println(num+" 是回文数..");
+					break;
+				} else {
+					System.out.println(num+" 不是回文数..");
+					break;
+				}
 			} else {
-				System.out.println(num+"不是回文数..");
+				System.out.println("输入的数不是一个5位数..");
+				break;
 			}
 		}
 	}
