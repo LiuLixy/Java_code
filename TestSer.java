@@ -13,7 +13,7 @@ import java.io.Serializable;
 class Person implements Serializable {
 	private String school;
 	private String name;
-	private int age;
+	private transient int age;
 	
 	public Person(String school, String name, int age) {
 		super();
