@@ -9,10 +9,18 @@ import java.io.OutputStream;
 public class TestIO {
 	public static void main(String[] args) throws Exception {
 		File file = new File("C:\\Users\\LiuWang\\Desktop\\Test.txt");
-		OutputStream output = new FileOutputStream(file);
-		String str = "Hello world\r\nhello Java"; 
-		output.write(str.getBytes());
-		output.close();
+		// OutputStream output = new FileOutputStream(file);
+		// String str = "Hello world\r\nhello Java"; 
+		// output.write(str.getBytes());
+		// output.close();
+		if(!file.exists()) {
+			file.createNewFile();
+		}
+		PrintStream printStream = new PrintStream(new FileOutputStream(file));
+		printStream.print("Hello ");
+		printStream.println("world");
+		printStream.print("hello Java");
+		printStream.close();
 	}
 }	
 
