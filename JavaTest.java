@@ -1,4 +1,4 @@
-题目: 给定一个非空字符串, 返回字符串中第一个出现一次的字符, 如果不存在返回-1.
+题目: 输入一个非空字符串, 返回字符串中第一个出现一次的字符, 如果不存在返回-1.
 
 public class Test {
 	public static void main(String[] args) {
