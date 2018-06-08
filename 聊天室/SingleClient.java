@@ -1,28 +1,80 @@
-package ÁÄÌìÊÒ;
+package èŠå¤©å®¤;
 
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
+import java.io.IOException;
+
+class OutToServer implements Runnable {
+    private Socket client;
+
+    public OutToServer(Socket client) {
+        this.client = client;
+    }
+
+    @Override
+    public void run() {
+        try {
+            // è·å–å®¢æˆ·ç«¯è¾“å‡ºæµï¼Œå‘æœåŠ¡å™¨å‘ç”Ÿä¿¡æ¯
+            PrintStream ps = new PrintStream(client.getOutputStream());
+            // ä»é”®ç›˜è¯»å–ä¿¡æ¯ï¼Œå‘é€ç»™æœåŠ¡å™¨
+            Scanner scanner = new Scanner(System.in);
+            scanner.useDelimiter("\n");
+            while (true) {
+                System.out.print("è¯·è¾“å…¥å†…å®¹: ");
+                if (scanner.hasNext()) {
+                    String str = scanner.nextLine();
+                    ps.println(str);
+                    if (str.equals("byebye")) {
+                        System.out.println("å®¢æˆ·ç«¯é€€å‡º...");
+                        ps.close();
+                        scanner.close();
+                        client.close();
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+/**
+ * è¯»å–æœåŠ¡å™¨çº¿ç¨‹
+ */
+class ReadFromServer implements Runnable {
+    private Socket client;
+
+    public ReadFromServer(Socket client) {
+        this.client = client;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Scanner scanner = new Scanner(client.getInputStream());
+            while (scanner.hasNext()) {
+                System.out.println("æœåŠ¡å™¨å‘æ¥çš„ä¿¡æ¯ä¸º: " + scanner.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 public class SingleClient {
-	public static void main(String[] args) {
-		try {
-			// ´´½¨Á¬½Ó·şÎñÆ÷µÄ¿Í»§¶ËÌ×½Ó×Ö
-			Socket socket = new Socket("127.0.0.1", 6666);
-			System.out.println("µÈ´ıÁ¬½Ó·şÎñÆ÷...");
-			// »ñÈ¡ÊäÈëÁ÷£¬¶ÁÈ¡·şÎñÆ÷ĞÅÏ¢
-			@SuppressWarnings("resource")
-			Scanner scanner = new Scanner(socket.getInputStream());
-			scanner.useDelimiter("\n");
-			if (scanner.hasNext()) {
-				System.out.println(scanner.next());
-			}
-			// »ñÈ¡Êä³öÁ÷£¬Ïò·şÎñÆ÷·¢ËÍĞÅÏ¢
-			PrintStream pStream = new PrintStream(socket.getOutputStream(), true);
-			pStream.print("Hello I'm Client !!!" + socket.getLocalPort() + "\n");
-			socket.close();
-		} catch (Exception e) {
-			
-		}
-	}
+    public static void main(String[] args) throws Exception {
+        try {
+            // åˆ›å»ºè¿æ¥æœåŠ¡å™¨çš„å®¢æˆ·ç«¯å¥—æ¥å­—
+            Socket client = new Socket("127.0.0.1", 6666);
+            System.out.println("ç­‰å¾…è¿æ¥æœåŠ¡å™¨...");
+            Thread readThread = new Thread(new ReadFromServer(client));
+            Thread writeThread = new Thread(new OutToServer(client));
+            readThread.start();
+            writeThread.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
