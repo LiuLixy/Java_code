@@ -31,6 +31,7 @@ public class Main {
         c.left = f;
         c.right = g;
         TreeNode result = Convert(root);
+        
     }
     public static TreeNode Convert(TreeNode pRootOfTree) {
         // 递归调用叶子节点的左右节点返回null
