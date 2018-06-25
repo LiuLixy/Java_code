@@ -17,7 +17,7 @@ public class MemoGroupJdbc {
         try {
             connection = jdbcUtil.connection();
             // ? 表示通配符
-            String sql = "insert into memo_group (title, group_id, create_time) values (?,?,?))";
+            String sql = "insert into memo_group (title, group_id, create_time) values (?,?,?)";
             statement = jdbcUtil.preparedStatement(connection, sql);
             if (statement == null) {
                 return 0;
