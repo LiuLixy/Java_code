@@ -14,7 +14,7 @@ interface Link {
 	void clear();                  //清空链表
 }
 
-class LinkFactory{
+class LinkFactory {
 	private LinkFactory() {}
 	public static Link getInstance() {
 		return new LinkImpl();
