@@ -161,7 +161,7 @@ class LinkImpl<T> implements Link<T> {
 
 	@Override
 	public void printLink() {
-		System.out.print("Á´±íÄÚÈÝÎª: ");
+		System.out.print("é“¾è¡¨å†…å®¹ä¸º: ");
 		Object[] result = this.toArray();
 		for(Object obj : result) {
 			System.out.print(obj+" ");
