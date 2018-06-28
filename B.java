@@ -1,5 +1,5 @@
 class A {	//构造方法
-	public A(){
+	public A() {
 		System.out.println("1. A类构造方法");
 	}
 	//非静态代码块
@@ -7,13 +7,13 @@ class A {	//构造方法
 		System.out.println("2. A类非静态代码块");
 	}
 	//静态代码块
-	static{
+	static {
 	System.out.println("3.A类静态代码块");
 	}
 }
 public class B extends A {
 	//构造方法
-	public B(){
+	public B() {
 		System.out.println("4.B类构造方法");
 	}
 	//非静态代码块
@@ -21,7 +21,7 @@ public class B extends A {
 		System.out.println("5.B类非静态代码块");
 	}
 	//静态代码块
-	static{
+	static {
 		System.out.println("6.B类静态代码块");
 	}
 	public static void main(String[] args) {
