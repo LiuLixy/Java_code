@@ -4,6 +4,7 @@ package linkedlist;
  * @Author: LiuWang
  * @Created: 2018/8/15 9:22
  */
+
 public interface ILinkedList<T> {
 
     /**
@@ -38,7 +39,7 @@ public interface ILinkedList<T> {
     boolean removeFront();
 
     /**
-     * 指定下标位置插入
+     * 在一个无头结点的单链表的一个节点前插入一个节点, 不允许遍历链表
      *
      * @param index
      * @param t
@@ -115,7 +116,15 @@ public interface ILinkedList<T> {
 
     /**
      * 打印单链表
+     * @param msg
      */
-    void linkedListPrint();
+    void linkedListPrint(String msg);
+
+    /**
+     * 逆序打印单链表, 非递归
+     */
+    void reversePrint();
+
+
 
 }
