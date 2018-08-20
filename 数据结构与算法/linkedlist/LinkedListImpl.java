@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.util.Stack;
+
 /**
  * @Author: LiuWang
  * @Created: 2018/8/15 10:06
@@ -7,13 +9,13 @@ package linkedlist;
 public class LinkedListImpl<T> implements ILinkedList<T> {
 
     private int size = 0;
-    private ListNode head;
+    private LinkNode head;
 
-    private class ListNode {
+    private class LinkNode {
         T t;
-        ListNode next;
+        LinkNode next;
 
-        private ListNode(T t) {
+        private LinkNode(T t) {
             this.t = t;
             next = null;
         }
@@ -21,13 +23,13 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
 
     @Override
     public boolean addBack(T t) {
-        ListNode newNode = new ListNode(t);
+        LinkNode newNode = new LinkNode(t);
         if (head == null) {
             head = newNode;
             this.size++;
             return true;
         }
-        ListNode cur = head;
+        LinkNode cur = head;
         while (cur.next != null) {
             cur = cur.next;
         }
@@ -41,9 +43,10 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
         if (head == null) {
             return false;
         }
-        ListNode cur = head;
+        LinkNode cur = head;
         if (cur.next == null) {
             cur = null;
+            head = null;
             this.size--;
             return true;
         }
@@ -61,7 +64,7 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
 
     @Override
     public boolean addFront(T t) {
-        ListNode newNode = new ListNode(t);
+        LinkNode newNode = new LinkNode(t);
         // 新节点的 next 指向原链表的头节点，
         // 再将 head 指向新节点，就完成了头插操作
         newNode.next = head;
@@ -75,7 +78,7 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
         if (head == null) {
             return false;
         }
-        ListNode toDelete = head;
+        LinkNode toDelete = head;
         head = head.next;
         toDelete.next = null;
         toDelete = null;
@@ -96,8 +99,8 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
             addBack(t);
             return true;
         }
-        ListNode newNode = new ListNode(t);
-        ListNode cur = head;
+        LinkNode newNode = new LinkNode(t);
+        LinkNode cur = head;
         for (int i = 0; i < index - 1; i++) {
             cur = cur.next;
         }
@@ -120,12 +123,12 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
             removeBack();
             return true;
         }
-        ListNode cur = head;
+        LinkNode cur = head;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
-        ListNode toDelete = cur;
-        ListNode toDeleteNext = cur.next;
+        LinkNode toDelete = cur;
+        LinkNode toDeleteNext = cur.next;
         toDelete.t = toDeleteNext.t;
         toDelete.next = toDeleteNext.next;
         toDeleteNext.next = null;
@@ -141,7 +144,7 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
 
     @Override
     public int indexOf(T t) {
-        ListNode cur = head;
+        LinkNode cur = head;
         for (int i = 0; i < this.size; i++) {
             if (t.equals(cur.t)) {
                 return i;
@@ -171,7 +174,15 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
 
     @Override
     public boolean set(int index, T t) {
-        return false;
+        if (index >= this.size) {
+            return false;
+        }
+        LinkNode cur = head;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        cur.t = t;
+        return true;
     }
 
     @Override
@@ -179,7 +190,7 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
         if (index < 0 || index >= this.size) {
             return null;
         }
-        ListNode cur = head;
+        LinkNode cur = head;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
@@ -193,9 +204,9 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
 
     @Override
     public void clear() {
-        ListNode cur = head;
+        LinkNode cur = head;
         for (int i = 0; i < this.size; i++) {
-            ListNode curNext = cur.next;
+            LinkNode curNext = cur.next;
             cur.next = null;
             cur.t = null;
             cur = curNext;
@@ -206,10 +217,30 @@ public class LinkedListImpl<T> implements ILinkedList<T> {
     }
 
     @Override
-    public void linkedListPrint() {
-        for (ListNode cur = head; cur != null; cur = cur.next) {
+    public void linkedListPrint(String msg) {
+        System.out.print(msg + ": ");
+        for (LinkNode cur = head; cur != null; cur = cur.next) {
             System.out.print("[" + cur.t + "] -> ");
         }
         System.out.println("[null]");
+    }
+
+    @Override
+    public void reversePrint() {
+        if (head == null) {
+            return;
+        }
+        LinkNode cur = head;
+        Stack<T> stack = new Stack<T>();
+        while (cur != null) {
+            stack.push(cur.t);
+            cur = cur.next;
+        }
+        System.out.print("[null]");
+        while (!stack.isEmpty()) {
+            System.out.print(" -> [" + stack.peek() + "]");
+            stack.pop();
+        }
+        System.out.println();
     }
 }
