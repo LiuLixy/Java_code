@@ -1,4 +1,5 @@
-class A {	//构造方法
+class A {	
+	//构造方法
 	public A() {
 		System.out.println("1. A类构造方法");
 	}
